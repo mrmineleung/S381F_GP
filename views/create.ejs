@@ -1,0 +1,53 @@
+<html>
+	<head><!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    body    { padding-top:50px; }
+</style>
+<title>Create Restaurant</title></head>
+   <body>
+   	<div class="container">
+      <H1>Hello, <%= name %></H1>
+      <H2>Create Restaurant</H2><br/>
+      <form id="details" method="post" action="/create" enctype="multipart/form-data" >
+		<div class="panel panel-primary">
+  <div class="panel-heading">Basic Info</div>
+  <div class="panel-body">
+  	Restaurant ID: <input type="text" class="form-control" name="restaurantid" ><br>
+  	Name: <input type="text" class="form-control" name="name" ><br>
+	Borough: <input type="text" class="form-control" name="borough" ><br>
+	Cuisine: <input type="text" class="form-control" name="cuisine" ><br>
+	Photo: <input type="file"  name="filetoupload"><br></div>
+</div>
+	
+	<!-- Photo mimetype: <input type="text" name="photo_mimetype" ><br> -->
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Address</div>
+      <div class="panel-body"><!-- Address -->
+	Building: <input type="text" class="form-control" name="building" ><br>
+	Street: <input type="text" class="form-control" name="street" ><br>
+	Zipcode: <input type="text" class="form-control" name="zipcode" ><br></div>
+    </div>
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Coord</div>
+      <div class="panel-body"><!-- Coord -->
+	Lat:<input type="text" class="form-control" name="lat" > Lng:<input type="text" class="form-control" name="lng" ><br></div>
+    </div>
+	<div class="panel panel-default">
+  <div class="panel-body">Owner: <%= name %><input type="hidden" name="owner" value="<%= name %>"  ><br></div>
+</div>
+	
+	</form>
+	<script>
+	function goBack() {window.history.back();}
+	</script>
+	<button type="submit" form="details" class="btn btn-default" value="Create">Create</button>
+	<button onclick="goBack()" class="btn btn-default">Go Back</button>
+      <br/><br/>
+      </div>
+   </body>
+</html>

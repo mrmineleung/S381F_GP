@@ -1,0 +1,18 @@
+{
+    "name": "server",
+    "description": "COMPS381F Group Project",
+    "author": "CLS",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "*",
+        "ejs": "*",
+        "body-parser": "*",
+        "cookie-session": "*",
+        "mongodb": "2.2.36",
+        "formidable": "latest"
+    },
+    "engine": "node >= 0.10.0",
+    "scripts": {
+        "start": "node server"
+    }
+}

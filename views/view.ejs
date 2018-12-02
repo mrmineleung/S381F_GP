@@ -1,0 +1,104 @@
+<html>
+   <head>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+<!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    body    { padding-top:50px; }
+</style>
+
+      <title>View Restaurant</title>
+      <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 50%;
+      }
+
+
+    </style>
+   </head>
+   <body>
+     <div class="container">
+      <H1>Hello, <%= name %></H1>
+      <H2>View Restaurant</H2><br/>
+      <div class="panel panel-primary">
+      <div class="panel-heading"><%= result[0].name %></div>
+      <div class="panel-body">
+        <% if (result[0].photo != '') { %>
+         <img src="data:<%=result[0].photo_mimetype%>;base64, <%=result[0].photo%>">
+      <% } %>
+      <br />
+      Restaurant ID: <%= result[0].restaurantid %><br />
+      Name: <%= result[0].name %><br />
+      Borough: <%= result[0].borough %><br>
+	Cuisine: <%= result[0].cuisine %><br>
+	<!--Photo: <%= result[0].photo %><br> -->
+	Photo mimetype: <%= result[0].photo_mimetype %><br>
+	Address<br>
+	Building: <%= result[0].address.building %><br>
+	Street: <%= result[0].address.street %><br>
+	Zipcode: <%= result[0].address.zipcode %><br>
+	Coord: <%= result[0].address.coord %><br>
+	Grades<br>
+	Total:   <%=result[0].grades.length%> <br>
+	<% for (let i = 0; i < result[0].grades.length; i++) {%>
+   <%=i+1%>. User: <%= result[0].grades[i].user %> Score: <%= result[0].grades[i].score %><br>
+	<% } %>
+	Owner: <%= result[0].owner %></div>
+    </div>
+      
+
+
+      <br />
+      <br />
+      <a href="/update?id=<%= result[0]._id %>" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Update Restaurant</a>
+      <br/>
+      <% if (name == result[0].owner) { %>
+      <br/>
+      <form method="post" action="/delete">
+        <input type="hidden" name="id" value="<%= result[0]._id %>">
+        <button type="submit" class="btn btn-danger"value="Delete"><span class="glyphicon glyphicon-remove"></span> Delete Restaurant</button>
+      </form>
+      <% } %>
+            <br /><form method="post" action="/rate">
+             Score ( 1 - 10 ) : 
+             <div class="row">
+               <input type="hidden" name="user" value="<%= name %>">
+        <input type="hidden" name="id" value="<%= result[0]._id %>">
+        
+  <div class="col-sm-3"><input type="text" class="form-control" name="score" ></div>
+  <div class="col-sm-6"><button type="submit" class="btn btn-warning" value="Rate">Rate</button></div>
+</div> 
+        
+      </form>
+      <br />
+      <% if (result[0].address.coord != null || result[0].address.coord != undefined) { %>
+         <div id="map"></div><br>
+      <% } %>
+      
+    <script>
+      function initMap() {
+        var myLatLng = {lat: <%= lat %>, lng: <%= lng %>};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 18,
+          center: myLatLng
+        });
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: '<%= result[0].name %>'
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUJqNBr7rL3-kiful9wSVQ4WVe_mk_LDo&callback=initMap">
+    </script>
+      
+      <a href="/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span> Back to Home Page</a><br /><br />
+      </div>
+   </body>
+</html>

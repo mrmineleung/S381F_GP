@@ -1,0 +1,29 @@
+<html>
+   <head><!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    body    { padding-top:50px; }
+</style>
+<title>Search</title></head>
+   <body>
+      <div class="container">
+      <H1>Hello, <%= name %></H1>
+      Search Result: 
+      <br />
+      <ol>
+      <% for (let i = 0; i < result.length; i++) { %>
+         
+         <li><a href="/view?id=<%= result[i]._id %>"><%= result[i].name %></a></li>
+         
+      <% }%></ol>
+      <br />
+      	<script>
+	function goBack() {window.history.back();}
+	</script>
+      <button onclick="goBack()" class="btn btn-default">Go Back</button>
+      
+      </div>
+   </body>
+</html>

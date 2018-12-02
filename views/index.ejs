@@ -1,0 +1,38 @@
+<html>
+   <head><!-- CSS (load bootstrap from a CDN) -->
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    body    { padding-top:50px; }
+</style>
+<title>Home Page</title>
+   </head>
+   <body>
+      <div class="container">
+      <H1>Hello, <%= name %></H1>
+      <a href="/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create Restaurant</a>
+      <br /><br />Search : <br /><form method="GET" action="/search">
+       <div class="row">
+  <div class="col-sm-6"><input type="text" class="form-control"name="id"></div>
+  <div class="col-sm-3"><select class="form-control" name="type">
+    <option value="name">Name</option>
+    <option value="borough">Borough</option>
+    <option value="cuisine">Cuisine</option>
+  </select></div>
+  <div class="col-sm-3"><button type="submit" value="Search" class="btn btn-info"><span class="glyphicon glyphicon-search"></span> Search</button></div>
+</div> 
+      
+      </form>
+      <br />
+      <ol>
+      <% for (let i = 0; i < result_arr.length; i++) { %>
+         
+         <li><a href="/view?id=<%= result_arr[i]._id %>"><%= result_arr[i].name %></a></li>
+         
+      <% }%></ol>
+      <br />
+      <a href="/logout" class="btn btn-default"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+      </div>
+   </body>
+</html>
