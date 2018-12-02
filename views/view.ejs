@@ -55,15 +55,14 @@
 
       <br />
       <br />
-      <a href="/update?id=<%= result[0]._id %>" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Update Restaurant</a>
-      <br/>
       <% if (name == result[0].owner) { %>
-      <br/>
-      <form method="post" action="/delete">
-        <input type="hidden" name="id" value="<%= result[0]._id %>">
-        <button type="submit" class="btn btn-danger"value="Delete"><span class="glyphicon glyphicon-remove"></span> Delete Restaurant</button>
-      </form>
-      <% } %>
+        <a href="/update?id=<%= result[0]._id %>" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Update Restaurant</a>
+        <br/><br/>
+        <form method="post" action="/delete">
+          <input type="hidden" name="id" value="<%= result[0]._id %>">
+          <button type="submit" class="btn btn-danger"value="Delete"><span class="glyphicon glyphicon-remove"></span> Delete Restaurant</button>
+        </form>
+        <% } %>
             <br /><form method="post" action="/rate">
              Score ( 1 - 10 ) : 
              <div class="row">
