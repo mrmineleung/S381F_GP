@@ -649,9 +649,8 @@ app.get('/api/restaurant/:type/:id', function(req, res) {
 });
 
 app.post('/api/restaurant', function(req, res) {
-	var result_json;
 	var new_r = {}; // document to be inserted
-	if (req.body.id) new_r['id'] = req.body.id;
+	if (req.body.restaurantid) new_r['restaurantid'] = req.body.restaurantid;
 	if (req.body.name) new_r['name'] = req.body.name;
 	if (req.body.borough) new_r['borough'] = req.body.borough;
 	if (req.body.cuisine) new_r['cuisine'] = req.body.cuisine;
@@ -670,24 +669,21 @@ app.post('/api/restaurant', function(req, res) {
 
 	console.log('About to insert: ' + JSON.stringify(new_r));
 
-	if (new_r["name"] != null) {
+	if (new_r["name"] != null && new_r["owner"] != null) {
 		MongoClient.connect(mongourl, function(err, db) {
 			assert.equal(err, null);
 			console.log('Connected to MongoDB\n');
 			insertRestaurant(db, new_r, function(result) {
 				db.close();
 				console.log(JSON.stringify(result));
-				result_json.status = 'ok';
-				result_json._id = new_r._id;
-				res.status(200).json(result_json).end();
+				res.json({ status: "ok", _id: new_r._id });
 
 			});
 		});
 
 	}
 	else {
-		result_json.status = 'failed'
-		res.status(200).json(result_json).end();
+		res.json({ status: "failed" });
 	}
 
 
